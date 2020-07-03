@@ -1,15 +1,27 @@
 package br.com.alura.forum.controller.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.alura.forum.model.Curso;
 import br.com.alura.forum.model.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 
+// Classe que irá receber os dados da chamada POST orquestrada pela TopicosController
 public class TopicoForm {
 	
+	// Valida a entrada dos campos
+	@NotNull @NotEmpty @Length(min=5, max=50)
 	private String titulo;
-	private String mensagem;
-	private String nomeCurso;
 	
+	@NotNull @NotEmpty @Length(min=10, max=50)
+	private String mensagem;
+	
+	@NotNull @NotEmpty @Length(min=1)
+	private String nomeCurso;
+		
 	public Topico converter(CursoRepository cursoRepository) {
 		
 		Curso curso = cursoRepository.findByNome(nomeCurso);

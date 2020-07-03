@@ -2,6 +2,9 @@ package br.com.alura.forum.controller;
 
 import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import br.com.alura.forum.model.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
@@ -46,7 +49,9 @@ public class TopicosController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TopicoDto> cadastrar(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder) {
+	// @RequestBody informa que o objeto TopicoForm será recebido no formulário
+	// @Valid informa que o objeto deve ser valido conforme anotações nos atributos da classe TopicoForm
+	public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 		
 		Topico topico = form.converter(cursoRepository);
 		topicoRepository.save(topico);
